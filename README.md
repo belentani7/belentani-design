@@ -96,11 +96,12 @@ Sin instalar nada (`node >= 22.22`):
 
 | Comando | Que hace |
 |---|---|
-| `npm test` | 42 tests con el runner de Node: color/contraste, parser CSS, paletas, contrato y e2e HTTP. |
+| `npm test` | 47 tests con el runner de Node: color/contraste, parser CSS, paletas, contrato, resumen de Lighthouse y e2e HTTP. |
 | `npm run check` | Gate del sistema: tokens, colores a mano, contraste, accesibilidad, meta, contrato y presupuesto de bytes. Acepta `--only <grupo>` y `--json`. |
 | `npm run audit` | Metricas: bytes crudo/gzip/brotli, peticiones, tokens, componentes, contraste. `--compare <dir>` para ANTES/DESPUES, `--markdown`, `--json`. |
 | `npm run tokens` | Regenera `tokens.html` desde `tokens.css`. `npm run tokens:check` falla si esta obsoleto. |
-| `npm run serve` | Servidor estatico en `0.0.0.0:4173` con MIME correcto y 404 propio. |
+| `npm run serve` | Servidor estatico en `0.0.0.0:4173` con gzip, MIME correcto y 404 propio. |
+| `npm run lighthouse` | Resume los `lhr-*.json` de CI (mediana por pagina). `--markdown`, `--json`. |
 | `npm run verify` | `tokens:check` + `check` + `test`, en ese orden. |
 
 Todos aceptan `--help`. Con dependencias de desarrollo:

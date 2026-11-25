@@ -13,6 +13,7 @@
     "check": "node scripts/check-design.mjs",
     "html": "node scripts/check-design.mjs --only html",
     "audit": "node scripts/audit.mjs",
+    "lighthouse": "node scripts/lighthouse-summary.mjs",
     "tokens": "node scripts/build-tokens.mjs",
     "tokens:check": "node scripts/build-tokens.mjs --check",
     "serve": "node scripts/serve.mjs",

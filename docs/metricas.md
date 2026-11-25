@@ -5,7 +5,7 @@ Todo lo de esta pagina sale de comandos del repo, no de estimaciones:
 ```bash
 node scripts/audit.mjs --compare <copia-de-la-v1.0>   # tabla de abajo
 node scripts/check-design.mjs                         # gate: 0 errores
-node --test "tests/*.test.mjs"                        # 42 tests
+node --test "tests/*.test.mjs"                        # 47 tests
 ```
 
 ## Estado de partida
@@ -57,7 +57,7 @@ sobre un minimo de 4,5:1.
 
 | Comprobacion | Antes | Despues |
 |---|---|---|
-| `npm test` | no existia | 42 tests, 42 en verde |
+| `npm test` | no existia | 47 tests, 47 en verde |
 | Gate de tokens/contraste/espacios | no existia | `npm run check`: 0 errores |
 | Validacion HTML (W3C) | no existia | `html-validate`: 0 errores en 3 paginas |
 | Deploy de Pages | rojo | verde (`build` + `deploy` separados; espera activa del artefacto) |

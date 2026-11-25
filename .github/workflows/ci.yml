@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: write
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
@@ -68,6 +69,7 @@ jobs:
           echo "::error::El servidor no responde"; cat /tmp/serve.log; exit 1
 
       - name: Lighthouse contra la portada y la pagina de tokens
+        id: lighthouse
         uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
@@ -78,11 +80,18 @@ jobs:
           uploadArtifacts: true
           artifactName: lighthouse
 
-      - name: Resumen
+      - name: Puntuaciones medidas
         if: always()
+        env:
+          RESULTADOS: ${{ steps.lighthouse.outputs.resultsPath }}
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
         run: |
-          {
-            echo '## Lighthouse'
-            echo
-            echo 'Resultados adjuntos como artefacto `lighthouse`. Umbral: 0.95 en las cuatro categorias.'
-          } >> "$GITHUB_STEP_SUMMARY"
+          dir="${RESULTADOS:-.lighthouseci}"
+          echo '## Lighthouse' >> "$GITHUB_STEP_SUMMARY"
+          echo >> "$GITHUB_STEP_SUMMARY"
+          node scripts/lighthouse-summary.mjs --dir "$dir" --markdown >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "$PR" ]; then
+            node scripts/lighthouse-summary.mjs --dir "$dir" --markdown > /tmp/lighthouse.md
+            gh pr comment "$PR" --body-file /tmp/lighthouse.md
+          fi
