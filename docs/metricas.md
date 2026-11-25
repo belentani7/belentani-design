@@ -53,6 +53,19 @@ Los 384 pares son 32 usos reales de color x 6 temas x 2 esquemas. El peor par de
 es `control-border-surface` a 3,20:1 (minimo 3:1); antes el peor era `link-hover` a 3,00:1
 sobre un minimo de 4,5:1.
 
+## Lighthouse (Chrome real, CI)
+
+Medianas de 3 pasadas por pagina en el runner de GitHub Actions (`ci.yml`), con el
+servidor del propio repo sirviendo gzip:
+
+| Pagina | Pasadas | Rendimiento | Accesibilidad | Buenas practicas | SEO | FCP | LCP | TBT | CLS | SI |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `/` | 3 | 100 | 100 | 100 | 100 | 0,94 s | 0,94 s | 0 ms | 0,000 | 0,94 s |
+| `/tokens.html` | 3 | 100 | 100 | 100 | 100 | 0,90 s | 0,90 s | 0 ms | 0,000 | 0,90 s |
+
+Umbral del gate: 95 en las cuatro categorias. Los numeros los publica el propio CI como
+comentario del PR (`scripts/lighthouse-summary.mjs`), no se copian a mano.
+
 ## Verificacion
 
 | Comprobacion | Antes | Despues |
