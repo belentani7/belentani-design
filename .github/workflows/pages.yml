@@ -1,0 +1,41 @@
+name: Deploy Pages
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Comprobar que tokens, componentes y demo sirven
+        run: |
+          url="${{ steps.deployment.outputs.page_url }}"
+          for f in tokens.css design.css design.js index.html; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$url$f")
+            echo "$f -> HTTP $code"
+            [ "$code" = "200" ] || { echo "::error::$f no responde 200"; exit 1; }
+          done
