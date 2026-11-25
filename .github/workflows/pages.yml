@@ -1,7 +1,10 @@
 name: Deploy Pages
 
+# Solo la rama por defecto publica. Un push a una rama de trabajo ya no puede
+# sobrescribir produccion: eso lo cubre CI, que no despliega.
 on:
   push:
+    branches: [duck]
   workflow_dispatch:
 
 permissions:
@@ -14,28 +17,75 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
+    name: Verificar y empaquetar
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+
+      - name: No publicar un sistema roto
+        run: npm run verify
+
+      - name: Empaquetar solo lo que se sirve
+        run: |
+          mkdir -p _site
+          cp index.html tokens.html 404.html tokens.css design.css design.js favicon.svg _site/
+          touch _site/.nojekyll
+          ls -l _site
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    name: Publicar
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/configure-pages@v5
-
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
+      # Un job distinto ya da segundos de margen, pero no siempre bastan:
+      # la API de artefactos tarda hasta ~46 s en verlo (actions/deploy-pages#451).
+      # Se espera a que exista de verdad en vez de dormir a ciegas.
+      - name: Esperar a que el artefacto sea visible
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          api="$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts"
+          for intento in $(seq 1 30); do
+            cuenta=$(curl -sS -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "$api" | jq '[.artifacts[] | select(.name == "github-pages")] | length')
+            echo "intento $intento: $cuenta artefacto(s) github-pages"
+            if [ "$cuenta" -ge 1 ]; then exit 0; fi
+            sleep 5
+          done
+          echo "::error::El artefacto github-pages no aparece tras 150 s (actions/deploy-pages#451)"
+          exit 1
 
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
+        with:
+          artifact_name: github-pages
+          timeout: 600000
 
-      - name: Comprobar que tokens, componentes y demo sirven
+      - name: Comprobar que el sitio publicado sirve todo
         run: |
-          url="${{ steps.deployment.outputs.page_url }}"
-          for f in tokens.css design.css design.js index.html; do
-            code=$(curl -s -o /dev/null -w '%{http_code}' "$url$f")
+          base="${{ steps.deployment.outputs.page_url }}"
+          fallos=0
+          for f in tokens.css design.css design.js index.html tokens.html 404.html favicon.svg; do
+            code=000
+            for intento in 1 2 3 4 5; do
+              code=$(curl -s -o /dev/null -w '%{http_code}' "$base$f?sha=${GITHUB_SHA::7}")
+              [ "$code" = "200" ] && break
+              sleep 5
+            done
             echo "$f -> HTTP $code"
-            [ "$code" = "200" ] || { echo "::error::$f no responde 200"; exit 1; }
+            [ "$code" = "200" ] || { echo "::error::$f no responde 200"; fallos=1; }
           done
+          exit $fallos
