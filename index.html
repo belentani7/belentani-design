@@ -4,25 +4,54 @@
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <title>Belentani Design - un sistema, todas las webs</title>
-<meta name='description' content='Biblioteca de diseno del estate belentani7: tokens, temas, componentes y adopcion en dos lineas.'>
+<meta name='description' content='Biblioteca de diseno del estate belentani7: 88 tokens, seis temas, 384 pares de contraste medidos y una adopcion de dos lineas sin build.'>
 <meta name='color-scheme' content='dark light'>
+<meta name='theme-color' content='#0a0a0f' media='(prefers-color-scheme: dark)'>
+<meta name='theme-color' content='#fcfcfd' media='(prefers-color-scheme: light)'>
+<link rel='icon' href='favicon.svg' type='image/svg+xml'>
+<link rel='canonical' href='https://www.belentani.es/belentani-design/'>
+<meta property='og:type' content='website'>
+<meta property='og:title' content='Belentani Design - un sistema, todas las webs'>
+<meta property='og:description' content='Tokens, temas y componentes para que cada repo deje de inventar su propia paleta. Sin build, sin framework, sin CDN.'>
+<meta property='og:url' content='https://www.belentani.es/belentani-design/'>
+<meta property='og:locale' content='es_ES'>
+<meta name='twitter:card' content='summary'>
 <link rel='stylesheet' href='tokens.css'>
 <link rel='stylesheet' href='design.css'>
+<script>
+  /* Antes del primer pintado: esquema guardado (o el del sistema) y marca .js,
+     para que no haya destello ni componentes invisibles sin JavaScript. */
+  (function () {
+    var root = document.documentElement;
+    root.classList.add('js');
+    try {
+      var saved = localStorage.getItem('b-scheme');
+      root.dataset.scheme = saved || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    } catch (e) {
+      root.dataset.scheme = 'dark';
+    }
+  })();
+</script>
 </head>
 <body>
-<a class='b-skip' href='#contenido'>Saltar al contenido</a>
 <div class='b-shell'>
 
 <header class='b-nav'>
+  <a class='b-skip' href='#contenido'>Saltar al contenido</a>
   <div class='b-container b-nav__inner'>
-    <a class='b-brand' href='#'><span class='b-brand__mark' aria-hidden='true'></span>Belentani Design</a>
-    <nav class='b-nav__links' aria-label='Secciones'>
+    <a class='b-brand' href='index.html'><span class='b-brand__mark' aria-hidden='true'></span>Belentani Design</a>
+    <nav class='b-nav__links' id='nav-menu' aria-label='Secciones'>
       <a href='#sistema'>Sistema</a>
       <a href='#temas'>Temas</a>
       <a href='#componentes'>Componentes</a>
+      <a href='tokens.html'>Tokens</a>
       <a href='#adoptar'>Adoptar</a>
     </nav>
-    <div class='b-cluster' style='--gap:.5rem'>
+    <div class='b-cluster b-cluster--sm'>
+      <button class='b-btn is-quiet is-sm b-nav__toggle' type='button' data-nav-toggle aria-expanded='false' aria-controls='nav-menu'>
+        <span class='b-burger' aria-hidden='true'></span>
+        <span class='b-visually-hidden'>Secciones</span>
+      </button>
       <button class='b-btn is-quiet is-sm' type='button' data-toggle-scheme aria-pressed='false'>Claro / oscuro</button>
       <a class='b-btn is-primary is-sm' href='#adoptar'>Adoptar</a>
     </div>
@@ -35,19 +64,20 @@
     <div class='b-hero__bg' aria-hidden='true'></div>
     <div class='b-hero__grid' aria-hidden='true'></div>
     <div class='b-container'>
-      <div class='b-stack' style='--gap:1.5rem;max-width:52rem'>
-        <span class='b-eyebrow'><span class='b-dot'></span>v1.0 - sistema unico del estate</span>
+      <div class='b-stack b-stack--md b-measure'>
+        <span class='b-eyebrow'><span class='b-dot'></span>v1.1 - sistema unico del estate</span>
         <h1 class='b-display'>Un sistema.<br>Todas las <em>webs</em>.</h1>
         <p class='b-lead'>Tokens, temas y componentes para que cada repo deje de inventar su propia paleta. Se adopta con dos lineas y no necesita build, ni framework, ni un CDN ajeno.</p>
         <div class='b-cluster'>
           <a class='b-btn is-primary is-lg' href='#componentes'>Ver componentes</a>
           <a class='b-btn is-ghost is-lg' href='#adoptar'>Como adoptarlo</a>
         </div>
-        <div class='b-cluster' style='--gap:2.5rem;margin-top:1rem'>
+        <div class='b-cluster b-cluster--lg b-mt-lg'>
           <div class='b-stat'><b>309</b><span>repos</span></div>
           <div class='b-stat'><b>54</b><span>publicos</span></div>
           <div class='b-stat'><b>4</b><span>webs vivas</span></div>
           <div class='b-stat'><b>2</b><span>lineas</span></div>
+          <div class='b-stat'><b>0</b><span>dependencias</span></div>
         </div>
       </div>
     </div>
@@ -61,17 +91,19 @@
       </div>
       <div class='b-split'>
         <div class='b-prose b-reveal'>
-          <p>Todo el sistema vive en dos ficheros CSS y uno de JS. No hay paso de compilacion: un repo vacio y un repo con Vite usan exactamente el mismo enlace.</p>
-          <p>La regla es una: <strong>ningun color, tamano o sombra escrito a mano</strong>. Si algo falta, se anade al sistema y se comparte, nunca se parchea en una pagina.</p>
+          <p>Todo el sistema vive en dos hojas de estilo y un script. No hay paso de compilacion: un repo vacio y un repo con Vite usan exactamente el mismo enlace.</p>
+          <p>La regla es una: <strong>ningun color, tamano ni sombra escrito a mano</strong>. Si algo falta, se anade al sistema y se comparte, nunca se parchea en una pagina. Un script lo verifica en cada push.</p>
           <ul>
             <li>Escala tipografica fluida, sin media queries por tamano de texto.</li>
-            <li>Seis temas de marca y dos esquemas (oscuro y claro) con contraste medido.</li>
+            <li>Seis temas de marca y dos esquemas, con 32 pares de contraste medidos en cada uno.</li>
             <li>Foco visible, objetivos de 44 px y movimiento reducido respetado.</li>
+            <li>Navegacion movil operable y formularios con validacion real, no maquetas.</li>
           </ul>
+          <a class='b-btn is-ghost' href='tokens.html'>Ver los tokens medidos</a>
         </div>
-        <div class='b-stack b-reveal' style='--gap:.75rem'>
-          <div class='b-card'><div class='b-card__title'>48 tokens</div><p class='b-card__text'>Color, tipo, espacio, radio, sombra y movimiento en un solo sitio.</p></div>
-          <div class='b-card'><div class='b-card__title'>14 componentes</div><p class='b-card__text'>Navegacion, hero, boton, tarjeta, insignia, medidor, tabla, formulario, prosa y pie.</p></div>
+        <div class='b-stack b-stack--sm b-reveal'>
+          <div class='b-card'><div class='b-card__title'>88 tokens</div><p class='b-card__text'>Color, tipo, espacio, radio, control, sombra y movimiento en un solo sitio.</p></div>
+          <div class='b-card'><div class='b-card__title'>83 clases b-*</div><p class='b-card__text'>Navegacion, hero, boton, tarjeta, insignia, medidor, tabla, formulario, prosa y pie.</p></div>
           <div class='b-card'><div class='b-card__title'>0 dependencias</div><p class='b-card__text'>Ni Tailwind, ni React, ni fuentes externas: carga en un HTML de 1998.</p></div>
         </div>
       </div>
@@ -83,14 +115,15 @@
       <div class='b-section__head b-reveal'>
         <span class='b-kicker'>02 - temas</span>
         <h2 class='b-section__title'>Un atributo, otra identidad</h2>
+        <p class='b-lead'>Cada tema es un tono. El resto de la paleta se deriva de <code class='b-mono'>--h</code> y <code class='b-mono'>--h2</code>.</p>
       </div>
-      <div class='b-grid' style='--min:15rem;--gap:1rem'>
-        <div class='b-card b-reveal' data-theme='indigo'><div style='height:5rem;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--accent))'></div><p class='b-card__title' style='margin-top:1rem'>indigo</p><p class='b-card__text'>Por defecto. Belentani workspace y portfolio.</p></div>
-        <div class='b-card b-reveal' data-theme='navy'><div style='height:5rem;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--accent))'></div><p class='b-card__title' style='margin-top:1rem'>navy</p><p class='b-card__text'>Open School: azul profundo y oro.</p></div>
-        <div class='b-card b-reveal' data-theme='gold'><div style='height:5rem;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--accent))'></div><p class='b-card__title' style='margin-top:1rem'>gold</p><p class='b-card__text'>Certificados y credenciales.</p></div>
-        <div class='b-card b-reveal' data-theme='emerald'><div style='height:5rem;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--accent))'></div><p class='b-card__title' style='margin-top:1rem'>emerald</p><p class='b-card__text'>Lingua Abierta y estados correctos.</p></div>
-        <div class='b-card b-reveal' data-theme='warm'><div style='height:5rem;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--accent))'></div><p class='b-card__title' style='margin-top:1rem'>warm</p><p class='b-card__text'>Portfolio editorial, papel y tinta.</p></div>
-        <div class='b-card b-reveal' data-theme='violet'><div style='height:5rem;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--accent))'></div><p class='b-card__title' style='margin-top:1rem'>violet</p><p class='b-card__text'>Secure T: laboratorio y alertas.</p></div>
+      <div class='b-grid b-grid--sm'>
+        <div class='b-card b-reveal' data-theme='indigo'><div class='b-swatch' aria-hidden='true'></div><p class='b-card__title b-mt-lg'>indigo</p><p class='b-card__text'>Por defecto. Belentani workspace y portfolio.</p></div>
+        <div class='b-card b-reveal' data-theme='navy'><div class='b-swatch' aria-hidden='true'></div><p class='b-card__title b-mt-lg'>navy</p><p class='b-card__text'>Open School: azul profundo y oro.</p></div>
+        <div class='b-card b-reveal' data-theme='gold'><div class='b-swatch' aria-hidden='true'></div><p class='b-card__title b-mt-lg'>gold</p><p class='b-card__text'>Certificados y credenciales.</p></div>
+        <div class='b-card b-reveal' data-theme='emerald'><div class='b-swatch' aria-hidden='true'></div><p class='b-card__title b-mt-lg'>emerald</p><p class='b-card__text'>Lingua Abierta y estados correctos.</p></div>
+        <div class='b-card b-reveal' data-theme='warm'><div class='b-swatch' aria-hidden='true'></div><p class='b-card__title b-mt-lg'>warm</p><p class='b-card__text'>Portfolio editorial, papel y tinta.</p></div>
+        <div class='b-card b-reveal' data-theme='violet'><div class='b-swatch' aria-hidden='true'></div><p class='b-card__title b-mt-lg'>violet</p><p class='b-card__text'>Secure T: laboratorio y alertas.</p></div>
       </div>
     </div>
   </section>
@@ -101,9 +134,10 @@
         <span class='b-kicker'>03 - componentes</span>
         <h2 class='b-section__title'>Los mismos nombres en todas partes</h2>
       </div>
-      <div class='b-stack' style='--gap:2rem'>
+      <div class='b-stack b-stack--md'>
         <div class='b-card b-reveal'>
-          <p class='b-kicker' style='margin-bottom:1rem'>Botones</p>
+          <h3 class='b-card__title'>Botones</h3>
+          <p class='b-card__text b-mb-lg'>Todos por encima de 44 px de alto, con foco visible y sin objetivos tactiles diminutos.</p>
           <div class='b-cluster'>
             <button class='b-btn is-primary' type='button'>Primario</button>
             <button class='b-btn' type='button'>Normal</button>
@@ -114,31 +148,79 @@
             <button class='b-btn' type='button' disabled>Inactivo</button>
           </div>
         </div>
-        <div class='b-grid' style='--min:17rem'>
-          <article class='b-card b-reveal'><span class='b-badge is-ok'><span class='b-dot'></span>publicado</span><h3 class='b-card__title' style='margin-top:.75rem'>Tarjeta con insignia</h3><p class='b-card__text'>Un solo componente para curso, repo, leccion o proyecto.</p><div class='b-meter' style='margin-top:1rem;--v:72%'><span></span></div><p class='b-hint' style='margin-top:.5rem'>72% de la ruta</p></article>
-          <article class='b-card b-reveal'><span class='b-badge is-warn'><span class='b-dot'></span>en revision</span><h3 class='b-card__title' style='margin-top:.75rem'>Estado explicito</h3><p class='b-card__text'>Nunca solo color: texto e insignia dicen lo mismo.</p><div class='b-meter' style='margin-top:1rem;--v:40%'><span></span></div><p class='b-hint' style='margin-top:.5rem'>40% de la ruta</p></article>
-          <article class='b-card b-reveal'><span class='b-badge is-bad'><span class='b-dot'></span>bloqueado</span><h3 class='b-card__title' style='margin-top:.75rem'>Limite honesto</h3><p class='b-card__text'>El sistema tambien sirve para decir lo que no se puede.</p><div class='b-meter' style='margin-top:1rem;--v:8%'><span></span></div><p class='b-hint' style='margin-top:.5rem'>8% de la ruta</p></article>
+        <div class='b-grid b-grid--wide'>
+          <article class='b-card b-reveal'>
+            <span class='b-badge is-ok'><span class='b-dot'></span>publicado</span>
+            <h3 class='b-card__title b-mt'>Tarjeta con insignia</h3>
+            <p class='b-card__text'>Un solo componente para curso, repo, leccion o proyecto.</p>
+            <progress class='b-meter b-mt-lg' max='100' value='72' aria-label='Ruta completada'>72%</progress>
+            <p class='b-hint b-mt-sm'>72% de la ruta</p>
+          </article>
+          <article class='b-card b-reveal'>
+            <span class='b-badge is-warn'><span class='b-dot'></span>en revision</span>
+            <h3 class='b-card__title b-mt'>Estado explicito</h3>
+            <p class='b-card__text'>Nunca solo color: texto e insignia dicen lo mismo.</p>
+            <progress class='b-meter b-mt-lg' max='100' value='40' aria-label='Revision completada'>40%</progress>
+            <p class='b-hint b-mt-sm'>40% de la ruta</p>
+          </article>
+          <article class='b-card b-reveal'>
+            <span class='b-badge is-bad'><span class='b-dot'></span>bloqueado</span>
+            <h3 class='b-card__title b-mt'>Limite honesto</h3>
+            <p class='b-card__text'>El sistema tambien sirve para decir lo que no se puede.</p>
+            <progress class='b-meter b-mt-lg' max='100' value='8' aria-label='Ruta completada hasta el bloqueo'>8%</progress>
+            <p class='b-hint b-mt-sm'>8% de la ruta</p>
+          </article>
         </div>
-        <div class='b-split'>
+        <div class='b-split b-split--start'>
           <div class='b-card b-reveal b-card--pad-lg'>
-            <p class='b-kicker' style='margin-bottom:1rem'>Formulario</p>
-            <div class='b-stack' style='--gap:1rem'>
-              <div class='b-field'><label class='b-label' for='correo'>Correo</label><input class='b-input' id='correo' type='email' placeholder='tu@correo.es'><span class='b-hint'>Sin pixeles ni redirecciones rastreadas.</span></div>
-              <div class='b-field'><label class='b-label' for='nivel'>Nivel</label><select class='b-select' id='nivel'><option>A1</option><option>A2</option><option>B1</option></select></div>
-              <button class='b-btn is-primary' type='button'>Guardar</button>
-            </div>
+            <h3 class='b-card__title b-mb-lg'>Formulario</h3>
+            <form class='b-stack b-stack--md' data-demo-form novalidate>
+              <div class='b-field'>
+                <label class='b-label' for='correo'>Correo</label>
+                <input class='b-input' id='correo' name='correo' type='email' placeholder='tu@correo.es' autocomplete='email' required aria-describedby='correo-hint'>
+                <span class='b-hint' id='correo-hint'>Sin pixeles ni redirecciones rastreadas.</span>
+              </div>
+              <div class='b-field'>
+                <label class='b-label' for='nivel'>Nivel</label>
+                <select class='b-select' id='nivel' name='nivel'>
+                  <option>A1</option>
+                  <option>A2</option>
+                  <option>B1</option>
+                </select>
+              </div>
+              <button class='b-btn is-primary' type='submit'>Guardar</button>
+              <p class='b-hint' role='status' data-form-status>Demo local: valida en el navegador y no envia nada.</p>
+            </form>
           </div>
           <div class='b-card b-reveal b-card--pad-lg'>
-            <p class='b-kicker' style='margin-bottom:1rem'>Tabla</p>
-            <table class='b-table'>
-              <thead><tr><th>Web</th><th>Tema</th><th>Estado</th></tr></thead>
-              <tbody>
-                <tr><td>Belentani</td><td>indigo</td><td><span class='b-badge is-ok'>200</span></td></tr>
-                <tr><td>Open School</td><td>navy</td><td><span class='b-badge is-ok'>200</span></td></tr>
-                <tr><td>Portfolio</td><td>warm</td><td><span class='b-badge is-ok'>200</span></td></tr>
-                <tr><td>Open Manus</td><td>indigo</td><td><span class='b-badge is-warn'>sin tema</span></td></tr>
-              </tbody>
-            </table>
+            <h3 class='b-card__title b-mb-lg'>Tabla</h3>
+            <div class='b-table-wrap'>
+              <table class='b-table'>
+                <caption class='b-visually-hidden'>Estado de las webs del estate</caption>
+                <thead>
+                  <tr><th scope='col'>Web</th><th scope='col'>Tema</th><th scope='col'>Estado</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Belentani</td><td>indigo</td><td><span class='b-badge is-ok'>200</span></td></tr>
+                  <tr><td>Open School</td><td>navy</td><td><span class='b-badge is-ok'>200</span></td></tr>
+                  <tr><td>Portfolio</td><td>warm</td><td><span class='b-badge is-ok'>200</span></td></tr>
+                  <tr><td>Open Manus</td><td>indigo</td><td><span class='b-badge is-warn'>sin tema</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class='b-card b-reveal b-card--pad-lg'>
+          <div class='b-split'>
+            <div class='b-stack b-stack--sm'>
+              <span class='b-kicker'>03.1 - contraste medido</span>
+              <h3 class='b-card__title'>384 pares, ninguno por debajo del minimo</h3>
+              <p class='b-card__text'>Doce combinaciones de tema y esquema por 32 usos reales de color. Los ratios los calcula el mismo codigo que rompe el build.</p>
+            </div>
+            <div class='b-cluster'>
+              <a class='b-btn is-primary' href='tokens.html#contraste'>Ver la matriz</a>
+              <a class='b-btn is-ghost' href='tokens.html#paletas'>Ver paletas</a>
+            </div>
           </div>
         </div>
       </div>
@@ -147,24 +229,28 @@
 
   <section class='b-section' id='adoptar'>
     <div class='b-container'>
-      <div class='b-split'>
-        <div class='b-stack b-reveal' style='--gap:1rem'>
+      <div class='b-split b-split--start'>
+        <div class='b-stack b-stack--md b-reveal'>
           <span class='b-kicker'>04 - adoptar</span>
           <h2 class='b-section__title'>Dos lineas y un atributo</h2>
-          <p class='b-lead'>Cualquier repo con un <code>index.html</code> queda dentro del sistema sin tocar su logica.</p>
-          <ol class='b-prose' style='padding-left:1.2rem'>
-            <li>Enlaza <code>tokens.css</code> y <code>design.css</code> en el <code>head</code>.</li>
-            <li>Pon <code>data-theme</code> en el <code>html</code> con el tema de la plataforma.</li>
-            <li>Sustituye colores a mano por clases <code>b-*</code> cuando toques esa pagina.</li>
+          <p class='b-lead'>Cualquier repo con un <code class='b-mono'>index.html</code> queda dentro del sistema sin tocar su logica.</p>
+          <ol class='b-prose b-prose--indent'>
+            <li>Enlaza <code class='b-mono'>tokens.css</code> y <code class='b-mono'>design.css</code> en el <code class='b-mono'>head</code>.</li>
+            <li>Pon <code class='b-mono'>data-theme</code> en el <code class='b-mono'>html</code> con el tema de la plataforma.</li>
+            <li>Sustituye colores a mano por clases <code class='b-mono'>b-*</code> cuando toques esa pagina.</li>
           </ol>
           <p class='b-hint'>Las webs ya publicadas no se reescriben de golpe: migran pagina a pagina, empezando por la portada.</p>
         </div>
-        <div class='b-stack b-reveal' style='--gap:1rem'>
-<pre class='b-code'>&lt;link rel='stylesheet' href='https://belentani7.github.io/belentani-design/tokens.css'&gt;
-&lt;link rel='stylesheet' href='https://belentani7.github.io/belentani-design/design.css'&gt;
-&lt;script src='https://belentani7.github.io/belentani-design/design.js' defer&gt;&lt;/script&gt;
+        <div class='b-stack b-stack--md b-reveal'>
+          <div class='b-code-wrap'>
+<pre class='b-code' id='adopt-code' tabindex='0'>&lt;link rel='stylesheet' href='https://www.belentani.es/belentani-design/tokens.css'&gt;
+&lt;link rel='stylesheet' href='https://www.belentani.es/belentani-design/design.css'&gt;
+&lt;script src='https://www.belentani.es/belentani-design/design.js' defer&gt;&lt;/script&gt;
 
 &lt;html lang='es' <b>data-theme='navy'</b>&gt;</pre>
+            <button class='b-btn is-quiet is-sm b-copy' type='button' data-copy='adopt-code'>Copiar</button>
+          </div>
+          <p class='b-hint' role='status' data-copy-status></p>
           <p class='b-hint'>Sin build, sin npm, sin CDN de terceros. El CSS se sirve con su tipo MIME correcto desde Pages.</p>
         </div>
       </div>
@@ -174,8 +260,8 @@
 </main>
 
 <footer class='b-footer'>
-  <div class='b-container b-cluster' style='justify-content:space-between'>
-    <span>Belentani Design v1.0 - parte del estate belentani7</span>
+  <div class='b-container b-cluster b-cluster--between'>
+    <span>Belentani Design v1.1 - parte del estate belentani7</span>
     <span class='b-mono'>&copy; <span data-year>2026</span> - MIT</span>
   </div>
 </footer>

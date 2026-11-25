@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang='es' data-theme='indigo'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>Esa pagina no existe - Belentani Design</title>
+<meta name='description' content='No hay nada en esta direccion. Vuelve a la demo del sistema o a la pagina de tokens.'>
+<meta name='robots' content='noindex'>
+<meta name='color-scheme' content='dark light'>
+<meta name='theme-color' content='#0a0a0f' media='(prefers-color-scheme: dark)'>
+<meta name='theme-color' content='#fcfcfd' media='(prefers-color-scheme: light)'>
+<link rel='icon' href='favicon.svg' type='image/svg+xml'>
+<meta property='og:title' content='Esa pagina no existe - Belentani Design'>
+<meta property='og:type' content='website'>
+<meta property='og:locale' content='es_ES'>
+<link rel='stylesheet' href='tokens.css'>
+<link rel='stylesheet' href='design.css'>
+<script>
+  (function () {
+    var root = document.documentElement;
+    root.classList.add('js');
+    try {
+      var saved = localStorage.getItem('b-scheme');
+      root.dataset.scheme = saved || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    } catch (e) {
+      root.dataset.scheme = 'dark';
+    }
+  })();
+</script>
+</head>
+<body>
+<div class='b-shell'>
+<header class='b-nav'>
+  <a class='b-skip' href='#contenido'>Saltar al contenido</a>
+  <div class='b-container b-nav__inner'>
+    <a class='b-brand' href='index.html'><span class='b-brand__mark' aria-hidden='true'></span>Belentani Design</a>
+    <nav class='b-nav__links' id='nav-menu' aria-label='Secciones'>
+      <a href='index.html#sistema'>Sistema</a>
+      <a href='index.html#temas'>Temas</a>
+      <a href='tokens.html'>Tokens</a>
+      <a href='index.html#adoptar'>Adoptar</a>
+    </nav>
+    <div class='b-cluster b-cluster--sm'>
+      <button class='b-btn is-quiet is-sm b-nav__toggle' type='button' data-nav-toggle aria-expanded='false' aria-controls='nav-menu'>
+        <span class='b-burger' aria-hidden='true'></span>
+        <span class='b-visually-hidden'>Secciones</span>
+      </button>
+      <button class='b-btn is-quiet is-sm' type='button' data-toggle-scheme aria-pressed='false'>Claro / oscuro</button>
+      <a class='b-btn is-primary is-sm' href='index.html'>Inicio</a>
+    </div>
+  </div>
+</header>
+
+<main class='b-main' id='contenido'>
+  <section class='b-hero'>
+    <div class='b-hero__bg' aria-hidden='true'></div>
+    <div class='b-hero__grid' aria-hidden='true'></div>
+    <div class='b-container'>
+      <div class='b-stack b-stack--md b-measure'>
+        <span class='b-eyebrow'><span class='b-dot'></span>error 404</span>
+        <h1 class='b-display'>Esa pagina<br>no <em>existe</em>.</h1>
+        <p class='b-lead'>Puede que el enlace sea viejo o que la pagina nunca llegara a publicarse. El sistema, los temas y los tokens siguen donde estaban.</p>
+        <div class='b-cluster'>
+          <a class='b-btn is-primary is-lg' href='index.html'>Volver a la demo</a>
+          <a class='b-btn is-ghost is-lg' href='tokens.html'>Ver los tokens</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class='b-footer'>
+  <div class='b-container b-cluster b-cluster--between'>
+    <span>Belentani Design v1.1 - parte del estate belentani7</span>
+    <span class='b-mono'>&copy; <span data-year>2026</span> - MIT</span>
+  </div>
+</footer>
+</div>
+<script src='design.js' defer></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{
+  "extends": [
+    "html-validate:recommended"
+  ],
+  "elements": [
+    "html5"
+  ],
+  "rules": {
+    "attr-quotes": [
+      "error",
+      {
+        "style": "any"
+      }
+    ],
+    "attribute-boolean-style": [
+      "error",
+      {
+        "style": "omit"
+      }
+    ],
+    "void-style": [
+      "error",
+      {
+        "style": "omit"
+      }
+    ],
+    "doctype-style": [
+      "error",
+      {
+        "style": "lowercase"
+      }
+    ],
+    "no-inline-style": "off",
+    "no-trailing-whitespace": "off",
+    "long-title": "off",
+    "prefer-native-element": [
+      "error",
+      {
+        "exclude": [
+          "progress"
+        ]
+      }
+    ],
+    "svg-focusable": "error",
+    "wcag/h63": "error"
+  }
+}
