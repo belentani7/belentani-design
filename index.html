@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang='es' data-theme='indigo'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>Belentani Design - un sistema, todas las webs</title>
+<meta name='description' content='Biblioteca de diseno del estate belentani7: tokens, temas, componentes y adopcion en dos lineas.'>
+<meta name='color-scheme' content='dark light'>
+<link rel='stylesheet' href='tokens.css'>
+<link rel='stylesheet' href='design.css'>
+</head>
+<body>
+<a class='b-skip' href='#contenido'>Saltar al contenido</a>
+<div class='b-shell'>
+
+<header class='b-nav'>
+  <div class='b-container b-nav__inner'>
+    <a class='b-brand' href='#'><span class='b-brand__mark' aria-hidden='true'></span>Belentani Design</a>
+    <nav class='b-nav__links' aria-label='Secciones'>
+      <a href='#sistema'>Sistema</a>
+      <a href='#temas'>Temas</a>
+      <a href='#componentes'>Componentes</a>
+      <a href='#adoptar'>Adoptar</a>
+    </nav>
+    <div class='b-cluster' style='--gap:.5rem'>
+      <button class='b-btn is-quiet is-sm' type='button' data-toggle-scheme aria-pressed='false'>Claro / oscuro</button>
+      <a class='b-btn is-primary is-sm' href='#adoptar'>Adoptar</a>
+    </div>
+  </div>
+</header>
+
+<main class='b-main' id='contenido'>
+
+  <section class='b-hero'>
+    <div class='b-hero__bg' aria-hidden='true'></div>
+    <div class='b-hero__grid' aria-hidden='true'></div>
+    <div class='b-container'>
+      <div class='b-stack' style='--gap:1.5rem;max-width:52rem'>
+        <span class='b-eyebrow'><span class='b-dot'></span>v1.0 - sistema unico del estate</span>
+        <h1 class='b-display'>Un sistema.<br>Todas las <em>webs</em>.</h1>
+        <p class='b-lead'>Tokens, temas y componentes para que cada repo deje de inventar su propia paleta. Se adopta con dos lineas y no necesita build, ni framework, ni un CDN ajeno.</p>
+        <div class='b-cluster'>
+          <a class='b-btn is-primary is-lg' href='#componentes'>Ver componentes</a>
+          <a class='b-btn is-ghost is-lg' href='#adoptar'>Como adoptarlo</a>
+        </div>
+        <div class='b-cluster' style='--gap:2.5rem;margin-top:1rem'>
+          <div class='b-stat'><b>309</b><span>repos</span></div>
+          <div class='b-stat'><b>54</b><span>publicos</span></div>
+          <div class='b-stat'><b>4</b><span>webs vivas</span></div>
+          <div class='b-stat'><b>2</b><span>lineas</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class='b-section' id='sistema'>
+    <div class='b-container'>
+      <div class='b-section__head b-reveal'>
+        <span class='b-kicker'>01 - sistema</span>
+        <h2 class='b-section__title'>Lo que trae, sin ceremonia</h2>
+      </div>
+      <div class='b-split'>
+        <div class='b-prose b-reveal'>
+          <p>Todo el sistema vive en dos ficheros CSS y uno de JS. No hay paso de compilacion: un repo vacio y un repo con Vite usan exactamente el mismo enlace.</p>
+          <p>La regla es una: <strong>ningun color, tamano o sombra escrito a mano</strong>. Si algo falta, se anade al sistema y se comparte, nunca se parchea en una pagina.</p>
+          <ul>
+            <li>Escala tipografica fluida, sin media queries por tamano de texto.</li>
+            <li>Seis temas de marca y dos esquemas (oscuro y claro) con contraste medido.</li>
+            <li>Foco visible, objetivos de 44 px y movimiento reducido respetado.</li>
+          </ul>
+        </div>
+        <div class='b-stack b-reveal' style='--gap:.75rem'>
+          <div class='b-card'><div class='b-card__title'>48 tokens</div><p class='b-card__text'>Color, tipo, espacio, radio, sombra y movimiento en un solo sitio.</p></div>
+          <div class='b-card'><div class='b-card__title'>14 componentes</div><p class='b-card__text'>Navegacion, hero, boton, tarjeta, insignia, medidor, tabla, formulario, prosa y pie.</p></div>
+          <div class='b-card'><div class='b-card__title'>0 dependencias</div><p class='b-card__text'>Ni Tailwind, ni React, ni fuentes externas: carga en un HTML de 1998.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class='b-section' id='temas'>
+    <div class='b-container'>
+      <div class='b-section__head b-reveal'>
+        <span class='b-kicker'>02 - temas</span>
+        <h2 class='b-section__title'>Un atributo, otra identidad</h2>
+      </div>
+      <div class='b-grid' style='--min:15rem;--gap:1rem'>
+        <div class='b-card b-reveal' data-theme='indigo'><div style='height:5rem;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--accent))'></div><p class='b-card__title' style='margin-top:1rem'>indigo</p><p class='b-card__text'>Por defecto. Belentani workspace y portfolio.</p></div>
+        <div class='b-card b-reveal' data-theme='navy'><div style='height:5rem;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--accent))'></div><p class='b-card__title' style='margin-top:1rem'>navy</p><p class='b-card__text'>Open School: azul profundo y oro.</p></div>
+        <div class='b-card b-reveal' data-theme='gold'><div style='height:5rem;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--accent))'></div><p class='b-card__title' style='margin-top:1rem'>gold</p><p class='b-card__text'>Certificados y credenciales.</p></div>
+        <div class='b-card b-reveal' data-theme='emerald'><div style='height:5rem;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--accent))'></div><p class='b-card__title' style='margin-top:1rem'>emerald</p><p class='b-card__text'>Lingua Abierta y estados correctos.</p></div>
+        <div class='b-card b-reveal' data-theme='warm'><div style='height:5rem;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--accent))'></div><p class='b-card__title' style='margin-top:1rem'>warm</p><p class='b-card__text'>Portfolio editorial, papel y tinta.</p></div>
+        <div class='b-card b-reveal' data-theme='violet'><div style='height:5rem;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--accent))'></div><p class='b-card__title' style='margin-top:1rem'>violet</p><p class='b-card__text'>Secure T: laboratorio y alertas.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class='b-section' id='componentes'>
+    <div class='b-container'>
+      <div class='b-section__head b-reveal'>
+        <span class='b-kicker'>03 - componentes</span>
+        <h2 class='b-section__title'>Los mismos nombres en todas partes</h2>
+      </div>
+      <div class='b-stack' style='--gap:2rem'>
+        <div class='b-card b-reveal'>
+          <p class='b-kicker' style='margin-bottom:1rem'>Botones</p>
+          <div class='b-cluster'>
+            <button class='b-btn is-primary' type='button'>Primario</button>
+            <button class='b-btn' type='button'>Normal</button>
+            <button class='b-btn is-ghost' type='button'>Fantasma</button>
+            <button class='b-btn is-quiet' type='button'>Callado</button>
+            <button class='b-btn is-primary is-sm' type='button'>Pequeno</button>
+            <button class='b-btn is-primary is-lg' type='button'>Grande</button>
+            <button class='b-btn' type='button' disabled>Inactivo</button>
+          </div>
+        </div>
+        <div class='b-grid' style='--min:17rem'>
+          <article class='b-card b-reveal'><span class='b-badge is-ok'><span class='b-dot'></span>publicado</span><h3 class='b-card__title' style='margin-top:.75rem'>Tarjeta con insignia</h3><p class='b-card__text'>Un solo componente para curso, repo, leccion o proyecto.</p><div class='b-meter' style='margin-top:1rem;--v:72%'><span></span></div><p class='b-hint' style='margin-top:.5rem'>72% de la ruta</p></article>
+          <article class='b-card b-reveal'><span class='b-badge is-warn'><span class='b-dot'></span>en revision</span><h3 class='b-card__title' style='margin-top:.75rem'>Estado explicito</h3><p class='b-card__text'>Nunca solo color: texto e insignia dicen lo mismo.</p><div class='b-meter' style='margin-top:1rem;--v:40%'><span></span></div><p class='b-hint' style='margin-top:.5rem'>40% de la ruta</p></article>
+          <article class='b-card b-reveal'><span class='b-badge is-bad'><span class='b-dot'></span>bloqueado</span><h3 class='b-card__title' style='margin-top:.75rem'>Limite honesto</h3><p class='b-card__text'>El sistema tambien sirve para decir lo que no se puede.</p><div class='b-meter' style='margin-top:1rem;--v:8%'><span></span></div><p class='b-hint' style='margin-top:.5rem'>8% de la ruta</p></article>
+        </div>
+        <div class='b-split'>
+          <div class='b-card b-reveal b-card--pad-lg'>
+            <p class='b-kicker' style='margin-bottom:1rem'>Formulario</p>
+            <div class='b-stack' style='--gap:1rem'>
+              <div class='b-field'><label class='b-label' for='correo'>Correo</label><input class='b-input' id='correo' type='email' placeholder='tu@correo.es'><span class='b-hint'>Sin pixeles ni redirecciones rastreadas.</span></div>
+              <div class='b-field'><label class='b-label' for='nivel'>Nivel</label><select class='b-select' id='nivel'><option>A1</option><option>A2</option><option>B1</option></select></div>
+              <button class='b-btn is-primary' type='button'>Guardar</button>
+            </div>
+          </div>
+          <div class='b-card b-reveal b-card--pad-lg'>
+            <p class='b-kicker' style='margin-bottom:1rem'>Tabla</p>
+            <table class='b-table'>
+              <thead><tr><th>Web</th><th>Tema</th><th>Estado</th></tr></thead>
+              <tbody>
+                <tr><td>Belentani</td><td>indigo</td><td><span class='b-badge is-ok'>200</span></td></tr>
+                <tr><td>Open School</td><td>navy</td><td><span class='b-badge is-ok'>200</span></td></tr>
+                <tr><td>Portfolio</td><td>warm</td><td><span class='b-badge is-ok'>200</span></td></tr>
+                <tr><td>Open Manus</td><td>indigo</td><td><span class='b-badge is-warn'>sin tema</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class='b-section' id='adoptar'>
+    <div class='b-container'>
+      <div class='b-split'>
+        <div class='b-stack b-reveal' style='--gap:1rem'>
+          <span class='b-kicker'>04 - adoptar</span>
+          <h2 class='b-section__title'>Dos lineas y un atributo</h2>
+          <p class='b-lead'>Cualquier repo con un <code>index.html</code> queda dentro del sistema sin tocar su logica.</p>
+          <ol class='b-prose' style='padding-left:1.2rem'>
+            <li>Enlaza <code>tokens.css</code> y <code>design.css</code> en el <code>head</code>.</li>
+            <li>Pon <code>data-theme</code> en el <code>html</code> con el tema de la plataforma.</li>
+            <li>Sustituye colores a mano por clases <code>b-*</code> cuando toques esa pagina.</li>
+          </ol>
+          <p class='b-hint'>Las webs ya publicadas no se reescriben de golpe: migran pagina a pagina, empezando por la portada.</p>
+        </div>
+        <div class='b-stack b-reveal' style='--gap:1rem'>
+<pre class='b-code'>&lt;link rel='stylesheet' href='https://belentani7.github.io/belentani-design/tokens.css'&gt;
+&lt;link rel='stylesheet' href='https://belentani7.github.io/belentani-design/design.css'&gt;
+&lt;script src='https://belentani7.github.io/belentani-design/design.js' defer&gt;&lt;/script&gt;
+
+&lt;html lang='es' <b>data-theme='navy'</b>&gt;</pre>
+          <p class='b-hint'>Sin build, sin npm, sin CDN de terceros. El CSS se sirve con su tipo MIME correcto desde Pages.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class='b-footer'>
+  <div class='b-container b-cluster' style='justify-content:space-between'>
+    <span>Belentani Design v1.0 - parte del estate belentani7</span>
+    <span class='b-mono'>&copy; <span data-year>2026</span> - MIT</span>
+  </div>
+</footer>
+
+</div>
+<script src='design.js' defer></script>
+</body>
+</html>
